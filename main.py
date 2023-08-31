@@ -23,3 +23,29 @@ def decode(key, enc):
         dec.append(dec_c)
     return "".join(dec)
 
+
+def save_and_encrypt_notes():
+    title = title_label_input.get()
+    secret = text_widget.get("1.0", "end")
+    key = key_label_input.get()
+
+    if len(title) == 0 or len(secret) == 0 or len(key) == 0:
+        tkinter.messagebox.showwarning(title="error", message="please enter all informations")
+
+    else:
+        secret_encrypted = encode(key,secret)
+        try:
+            with open("secret.txt", "a") as data_file:
+                data_file.write(f"\n{title}\n{secret_encrypted}")
+        except FileNotFoundError:
+            with open("secret.txt", "w") as data_file:
+                data_file.write(f"\n{title}\n{secret_encrypted}")
+
+        finally:
+            title_label_input.delete(0, tk.END)
+            text_widget.delete("1.0", "end")
+            key_label_input.delete(0, tk.END)
+
+
+
+
