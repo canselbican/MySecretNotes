@@ -61,6 +61,46 @@ def decode_secret():
         except:
             tk.messagebox.showwarning(title="error",message="please enter your encrypted message")
 
+window = tk.Tk()
+window.title("My Secret Notes")
+window.config(padx=20, pady=20)
+window.geometry("400x600")
+window.configure(bg='black')
 
+key_image = Image.open("img.png")
+resized_image = key_image.resize((160, 80))
+photo = ImageTk.PhotoImage(resized_image)
+
+image_label = tk.Label(window, image=photo, bg="yellow")
+image_label.pack()
+
+title_label = tk.Label(text="Enter Your Title", bg="yellow", foreground="black")
+title_label.pack(pady=5)
+
+title_label_input = tk.Entry(width=50)
+title_label_input.pack()
+
+text_label = tk.Label(text="Enter Your Secret", bg="yellow", foreground="black")
+text_label.pack(pady=5)
+
+text_widget = tk.Text(window, height=15)
+text_widget.pack(pady=5)
+
+key_label = tk.Label(text="Enter master key", bg="yellow", foreground="black")
+key_label.pack()
+
+key_label_input = tk.Entry(width=50)
+key_label_input.pack(pady=5)
+
+save_enc_button = tk.Button(text="Save & Encrypt", command=save_and_encrypt_notes)
+save_enc_button.pack(pady=5)
+
+dec_button = tk.Button(text="Decrypt",command=decode_secret)
+dec_button.pack(pady=5)
+
+result_label = tk.Label(text="", bg="gray10", foreground="white")
+result_label.pack()
+
+window.mainloop()
 
 
