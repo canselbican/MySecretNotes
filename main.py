@@ -46,6 +46,21 @@ def save_and_encrypt_notes():
             text_widget.delete("1.0", "end")
             key_label_input.delete(0, tk.END)
 
+def decode_secret():
+    secret = text_widget.get("1.0", "end")
+    key = key_label_input.get()
+
+    if len(secret) == 0 or len(key) == 0:
+        tkinter.messagebox.showwarning(title="error", message="please enter all informations")
+
+    else:
+        try:
+            dec_secret = decode(key,secret)
+            text_widget.delete("1.0", "end")
+            text_widget.insert("1.0",dec_secret)
+        except:
+            tk.messagebox.showwarning(title="error",message="please enter your encrypted message")
+
 
 
 
